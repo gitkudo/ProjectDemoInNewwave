@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KudoNavDrawerDemo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="frag_design">string_fragdesign</string>
+    <string name="tv_login">You further agree to comply with the supplemental terms and conditions set forth in this Agreement.</string>
+</resources>
