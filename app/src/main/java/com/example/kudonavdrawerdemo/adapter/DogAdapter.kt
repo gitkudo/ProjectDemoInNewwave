@@ -7,14 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kudonavdrawerdemo.R
-import com.example.kudonavdrawerdemo.`interface`.AboveItemClickListener
+import com.example.kudonavdrawerdemo.`interface`.DogItemClickListener
+import com.example.kudonavdrawerdemo.`interface`.ElephantItemClickListener
 import com.example.kudonavdrawerdemo.model.Dog
-import com.example.kudonavdrawerdemo.model.Horse
 import kotlin.collections.ArrayList
 
 class DogAdapter(
     private val listDog: ArrayList<Dog>,
-    private val listener: AboveItemClickListener
+    private val listener: DogItemClickListener
 ) : RecyclerView.Adapter<DogAdapter.LogoHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -35,7 +35,7 @@ class DogAdapter(
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onAboveItemClick(position)
+                listener.dogItemClick(position)
             }
         }
     }

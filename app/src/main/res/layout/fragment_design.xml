@@ -15,7 +15,7 @@
             layout="@layout/toolbar" />
 
         <ImageView
-           android:src="@drawable/elephant"
+            android:layout_margin="16dp"
             android:id="@+id/img_show"
             android:layout_width="0dp"
             android:layout_height="0dp"

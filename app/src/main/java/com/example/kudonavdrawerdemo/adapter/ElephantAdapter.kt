@@ -7,12 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kudonavdrawerdemo.R
-import com.example.kudonavdrawerdemo.`interface`.AboveItemClickListener
+import com.example.kudonavdrawerdemo.`interface`.ElephantItemClickListener
 import com.example.kudonavdrawerdemo.model.Elephant
 
 class ElephantAdapter(
     private val listElephant: ArrayList<Elephant>,
-    private val listener:AboveItemClickListener
+    private val listener:ElephantItemClickListener
 ) : RecyclerView.Adapter<ElephantAdapter.AboveHolder>() {
     inner class AboveHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
         var imgAbove:ImageView = itemView.findViewById(R.id.imgIconAbove)
@@ -24,7 +24,7 @@ class ElephantAdapter(
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onAboveItemClick(position)
+                listener.onEleItemClick(position)
             }
         }
     }

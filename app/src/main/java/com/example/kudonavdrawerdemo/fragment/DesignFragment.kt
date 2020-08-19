@@ -1,24 +1,23 @@
 package com.example.kudonavdrawerdemo.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kudonavdrawerdemo.MainActivity
 import com.example.kudonavdrawerdemo.R
-import com.example.kudonavdrawerdemo.`interface`.AboveItemClickListener
-import com.example.kudonavdrawerdemo.`interface`.OnItemClickListener
+import com.example.kudonavdrawerdemo.`interface`.*
 import com.example.kudonavdrawerdemo.adapter.BirdAdapter
+import com.example.kudonavdrawerdemo.adapter.CatAdapter
 import com.example.kudonavdrawerdemo.model.*
 import com.example.newwavesell.model.ItemBelow
 import com.example.newwavesell.ui.design.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
+class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListener,HorseItemClickListener,DogItemClickListener,CatItemClickListener,BirdItemClickListener {
     lateinit var rcvAbove: RecyclerView
     lateinit var rvBelow: RecyclerView
     lateinit var imgShow: ImageView
@@ -41,12 +40,11 @@ class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
 
     // horse RecycleView
     private var listCat = ArrayList<Cat>()
-    private val catAdapter = CatAdapter(listCat, this)
+    private val catAdapter = CatAdapter(listCat,this)
 
     // horse RecycleView
     private var listBird = ArrayList<Bird>()
     private val birdAdapter = BirdAdapter(listBird, this)
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,10 +56,8 @@ class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
         val imgBack = view?.findViewById<ImageView>(R.id.imgBack)
         imgBack?.setOnClickListener { activity?.onBackPressed() }
         rcvAbove = view.findViewById(R.id.rcvStyleAbove)!!
-
         //rcvBelow
         rvBelow = view?.findViewById(R.id.rcvStyle)!!
-
         initElephantRcv()
         initBelowRcv()
         return view
@@ -81,19 +77,17 @@ class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
         list.add(ItemBelow(R.drawable.ic_dog, "dog"))
         list.add(ItemBelow(R.drawable.ic_cat, "cat"))
         list.add(ItemBelow(R.drawable.ic_bird, "bird"))
-        list.add(ItemBelow(R.drawable.ic_bird, "bird"))
-        list.add(ItemBelow(R.drawable.ic_bird, "bird"))
-        list.add(ItemBelow(R.drawable.ic_bird, "bird"))
-        list.add(ItemBelow(R.drawable.ic_bird, "bird"))
-        list.add(ItemBelow(R.drawable.ic_bird, "bird"))
-        list.add(ItemBelow(R.drawable.ic_bird, "bird"))
-        list.add(ItemBelow(R.drawable.ic_bird, "bird"))
+
     }
 
     private fun initElephantRcv() {
-        listElephant.clear();
-        imgShow.setImageResource(R.drawable.ic_elephant)
-        imgShow.setColorFilter(null)
+        listElephant.clear()
+        imgShow.colorFilter = null
+        Handler().postDelayed(Runnable {
+            imgShow.setImageDrawable(resources.getDrawable(R.drawable.ic_elephant))
+
+        }, 100)
+
 
 
         if (rcvAbove != null) {
@@ -106,14 +100,6 @@ class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
         rcvAbove?.setHasFixedSize(true)
         listElephant.add(Elephant(R.drawable.ic_ele_colo, "Gray"))
         listElephant.add(Elephant(R.drawable.ic_ele_green, "Green"))
-        listElephant.add(Elephant(R.drawable.ic_ele_yellow, "Yellow"))
-        listElephant.add(Elephant(R.drawable.ic_ele_yellow, "Yellow"))
-        listElephant.add(Elephant(R.drawable.ic_ele_yellow, "Yellow"))
-        listElephant.add(Elephant(R.drawable.ic_ele_yellow, "Yellow"))
-        listElephant.add(Elephant(R.drawable.ic_ele_yellow, "Yellow"))
-        listElephant.add(Elephant(R.drawable.ic_ele_yellow, "Yellow"))
-        listElephant.add(Elephant(R.drawable.ic_ele_yellow, "Yellow"))
-        listElephant.add(Elephant(R.drawable.ic_ele_yellow, "Yellow"))
         listElephant.add(Elephant(R.drawable.ic_ele_yellow, "Yellow"))
     }
 
@@ -134,19 +120,11 @@ class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
         listHorse.add(Horse(R.drawable.ic_blue, "Blue"))
         listHorse.add(Horse(R.drawable.ic_green, "Green"))
         listHorse.add(Horse(R.drawable.ic_yellow, "Yellow"))
-        listHorse.add(Horse(R.drawable.ic_yellow, "Yellow"))
-        listHorse.add(Horse(R.drawable.ic_yellow, "Yellow"))
-        listHorse.add(Horse(R.drawable.ic_yellow, "Yellow"))
-        listHorse.add(Horse(R.drawable.ic_yellow, "Yellow"))
-        listHorse.add(Horse(R.drawable.ic_yellow, "Yellow"))
-        listHorse.add(Horse(R.drawable.ic_yellow, "Yellow"))
-        listHorse.add(Horse(R.drawable.ic_yellow, "Yellow"))
-        listHorse.add(Horse(R.drawable.ic_yellow, "Yellow"))
     }
     private fun initCatRcv() {
         listCat.clear();
         imgShow.setImageResource(R.drawable.ic_cat)
-        imgShow.setColorFilter(null)
+        imgShow.colorFilter = null
 
         if (rcvAbove != null) {
             rcvAbove.adapter = catAdapter
@@ -159,13 +137,6 @@ class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
         listCat.add(Cat(R.drawable.ic_cat_yellow, "Red"))
         listCat.add(Cat(R.drawable.ic_cat_yellow, "Blue"))
         listCat.add(Cat(R.drawable.ic_cat_yellow, "Green"))
-        listCat.add(Cat(R.drawable.ic_cat_yellow, "Yellow"))
-        listCat.add(Cat(R.drawable.ic_cat_yellow, "Yellow"))
-        listCat.add(Cat(R.drawable.ic_cat_yellow, "Yellow"))
-        listCat.add(Cat(R.drawable.ic_cat_yellow, "Yellow"))
-        listCat.add(Cat(R.drawable.ic_cat_yellow, "Yellow"))
-        listCat.add(Cat(R.drawable.ic_cat_yellow, "Yellow"))
-        listCat.add(Cat(R.drawable.ic_cat_yellow, "Yellow"))
         listCat.add(Cat(R.drawable.ic_cat_yellow, "Yellow"))
     }
     private fun initDogRcv() {
@@ -184,13 +155,10 @@ class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
         listDog.add(Dog(R.drawable.ic_dog_black, "Red"))
         listDog.add(Dog(R.drawable.ic_dog_black, "Blue"))
         listDog.add(Dog(R.drawable.ic_dog_black, "Green"))
-        listDog.add(Dog(R.drawable.ic_dog_black, "Yellow"))
-        listDog.add(Dog(R.drawable.ic_dog_black, "Yellow"))
-        listDog.add(Dog(R.drawable.ic_dog_black, "Yellow"))
-        listDog.add(Dog(R.drawable.ic_dog_black, "Yellow"))
-        listDog.add(Dog(R.drawable.ic_dog_black, "Yellow"))
-        listDog.add(Dog(R.drawable.ic_dog_black, "Yellow"))
-        listDog.add(Dog(R.drawable.ic_dog_black, "Yellow"))
+    }
+
+    fun open1(){
+
     }
     private fun initBirdRcv() {
         listBird.clear();
@@ -200,6 +168,7 @@ class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
         if (rcvAbove != null) {
             rcvAbove.adapter = birdAdapter
         }
+
         if (rcvAbove != null) {
             rcvAbove.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -208,12 +177,6 @@ class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
         listBird.add(Bird(R.drawable.ic_bird_gray, "Red"))
         listBird.add(Bird(R.drawable.ic_bird_gray, "Blue"))
         listBird.add(Bird(R.drawable.ic_bird_gray, "Green"))
-        listBird.add(Bird(R.drawable.ic_bird_gray, "Yellow"))
-        listBird.add(Bird(R.drawable.ic_bird_gray, "Yellow"))
-        listBird.add(Bird(R.drawable.ic_bird_gray, "Yellow"))
-        listBird.add(Bird(R.drawable.ic_bird_gray, "Yellow"))
-        listBird.add(Bird(R.drawable.ic_bird_gray, "Yellow"))
-        listBird.add(Bird(R.drawable.ic_bird_gray, "Yellow"))
         listBird.add(Bird(R.drawable.ic_bird_gray, "Yellow"))
     }
 
@@ -238,14 +201,34 @@ class DesignFragment : Fragment(), OnItemClickListener, AboveItemClickListener {
         activity?.nav_view?.visibility = View.GONE
     }
 
-    override fun onAboveItemClick(position: Int) {
+    override fun onEleItemClick(position: Int) {
         when (position) {
-            0 -> imgShow.setColorFilter(
-                ContextCompat.getColor(
-                    (activity as MainActivity),
-                    R.color.colorAccent
-                ), android.graphics.PorterDuff.Mode.SRC_IN
-            )
+            0 -> imgShow.setImageResource(R.drawable.ic_ele_colo)
+            1 -> imgShow.setImageResource(R.drawable.ic_ele_green)
+            2 -> imgShow.setImageResource(R.drawable.ic_ele_yellow)
         }
     }
+
+    override fun horseItemClick(position: Int) {
+        when(position){
+            0 -> imgShow.setImageResource(R.drawable.ic_red)
+            1 -> imgShow.setImageResource(R.drawable.ic_blue)
+            2 -> imgShow.setImageResource(R.drawable.ic_green)
+            3 -> imgShow.setImageResource(R.drawable.ic_yellow)
+        }
+    }
+
+    override fun dogItemClick(position: Int) {
+
+    }
+
+    override fun catItemClick(position: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun birdItemClick(position: Int) {
+        TODO("Not yet implemented")
+    }
+
+
 }

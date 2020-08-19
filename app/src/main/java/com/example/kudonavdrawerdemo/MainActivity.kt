@@ -32,15 +32,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         nav_view.setNavigationItemSelectedListener(this)
         setSupportActionBar(toolbar)
-//        homeFragment = HomeFragment()
-//        supportFragmentManager.beginTransaction().replace(R.id.frame_layout, homeFragment)
-//            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit()
         navigationPosition = R.id.nav_hone
         navigateToFragment(HomeFragment.newInstance())
         nav_view.setCheckedItem(navigationPosition)
 
-//        var menuIcon = resources.getDrawable(R.drawable.menu)
-//        menuIcon.colorFilter(resources.getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP)
         nav_icon.setOnClickListener {
             if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
                 drawer_layout.closeDrawer(GravityCompat.START)
@@ -49,14 +44,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-        supportActionBar?.setTitle(null)
+        supportActionBar?.title = null
 
     }
-//
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.menu_toolbar, menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
@@ -90,10 +80,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 navigationPosition = R.id.nav_design
                 navigateToFragment(DesignFragment.newInstance())
                 supportActionBar?.hide()
-//                designFragment =
-//                    DesignFragment()
-//                supportFragmentManager.beginTransaction().replace(R.id.frame_layout, designFragment)
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit()
 
             }
             R.id.nav_cart -> {

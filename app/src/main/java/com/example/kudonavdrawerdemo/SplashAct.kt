@@ -14,9 +14,9 @@ class SplashAct : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         setContentView(R.layout.activity_splash)
-        Handler().postDelayed({
+//        Handler().postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, 2000)
+//        }, 2000)
     }
 }

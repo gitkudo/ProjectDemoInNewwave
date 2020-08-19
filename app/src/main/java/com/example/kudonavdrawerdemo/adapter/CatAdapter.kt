@@ -1,4 +1,4 @@
-package com.example.newwavesell.ui.design
+package com.example.kudonavdrawerdemo.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,19 +7,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kudonavdrawerdemo.R
-import com.example.kudonavdrawerdemo.`interface`.AboveItemClickListener
+import com.example.kudonavdrawerdemo.`interface`.CatItemClickListener
 import com.example.kudonavdrawerdemo.model.Cat
-import com.example.kudonavdrawerdemo.model.Horse
 import kotlin.collections.ArrayList
 
 class CatAdapter(
     private val listCat: ArrayList<Cat>,
-    private val listener: AboveItemClickListener
+    private val listener: CatItemClickListener
 ) : RecyclerView.Adapter<CatAdapter.CatHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CatAdapter.CatHolder {
+    ): CatHolder {
         var view = LayoutInflater.from(parent.context).inflate(R.layout.item_logo, parent, false)
         return CatHolder(view)
     }
@@ -35,7 +34,7 @@ class CatAdapter(
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onAboveItemClick(position)
+                listener.catItemClick(position)
             }
         }
     }
@@ -44,7 +43,7 @@ class CatAdapter(
         return listCat.size
     }
 
-    override fun onBindViewHolder(holder: CatAdapter.CatHolder, position: Int) {
+    override fun onBindViewHolder(holder: CatHolder, position: Int) {
         var itemLogo = listCat[position]
         holder.imgLogo.setImageResource(itemLogo.image)
         holder.tv_name.text = itemLogo.name
