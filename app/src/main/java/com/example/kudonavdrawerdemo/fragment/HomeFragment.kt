@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
         val intentImage = view?.findViewById<ImageView>(R.id.img_hero)
         intentImage?.setOnClickListener {
             startActivity(Intent(context, AccountAct::class.java))

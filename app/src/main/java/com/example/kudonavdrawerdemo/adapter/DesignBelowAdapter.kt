@@ -19,7 +19,7 @@ class DesignBelowAdapter(
         parent: ViewGroup,
         viewType: Int
     ): BelowHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_below, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_below, parent, false)
         return BelowHolder(view)
     }
 
@@ -28,15 +28,15 @@ class DesignBelowAdapter(
     }
 
     override fun onBindViewHolder(holder: BelowHolder, position: Int) {
-        var imgItem = itemBelowList[position]
+        val imgItem = itemBelowList[position]
         holder.imgIcon.setImageResource(imgItem.image)
-        holder.tv_name.text = imgItem.name
+        holder.tvName.text = imgItem.name
     }
 
     inner class BelowHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-        var imgIcon = itemView.findViewById<ImageView>(R.id.imgIconBelow)
-        var tv_name = itemView.findViewById<TextView>(R.id.tv_name)
+        var imgIcon:ImageView = itemView.findViewById(R.id.imgIconBelow)
+        var tvName:TextView = itemView.findViewById(R.id.tv_name)
 
         init {
             itemView.setOnClickListener(this)

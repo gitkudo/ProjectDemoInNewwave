@@ -15,14 +15,14 @@ import com.example.newwavesell.model.Pro
 
 
 class ListgFragment : Fragment(),OnItemClickListener {
-    private val proList = generateList(10)
+    private val proList = generateList()
     private val adapter = ListProAdapter(proList, this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var root = inflater.inflate(R.layout.fragment_listg, container, false)
+        val root = inflater.inflate(R.layout.fragment_listg, container, false)
         val recyclerView = root?.findViewById<RecyclerView>(R.id.recyclerView)
         if (recyclerView != null) {
             recyclerView.adapter = adapter
@@ -33,7 +33,7 @@ class ListgFragment : Fragment(),OnItemClickListener {
         recyclerView?.setHasFixedSize(true)
         return root
     }
-    private fun generateList(size: Int): ArrayList<Pro> {
+    private fun generateList(): ArrayList<Pro> {
         val list = ArrayList<Pro>()
         for (i in 0..8) {
             val itemPro = Pro("T-shirt $i", 100, "L", R.color.colorPrimary, 1000, "5/4/1999")

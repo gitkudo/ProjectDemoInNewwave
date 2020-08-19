@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowManager
 import androidx.viewpager.widget.ViewPager
-import com.example.newwavesell.adapter.MyAdapter
+import com.example.kudonavdrawerdemo.adapter.MyAdapter
 import com.google.android.material.tabs.TabLayout
 
 class AccountAct : AppCompatActivity() {
@@ -22,8 +22,8 @@ class AccountAct : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.clear)
 
-        tabLayout = findViewById<TabLayout>(R.id.tbAcc)
-        viewPager = findViewById<ViewPager>(R.id.vpAcc)
+        tabLayout = findViewById(R.id.tbAcc)
+        viewPager = findViewById(R.id.vpAcc)
 
         tabLayout?.addTab(tabLayout!!.newTab().setText("Login"))
         tabLayout?.addTab(tabLayout!!.newTab().setText("Register"))
@@ -51,7 +51,7 @@ class AccountAct : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var id = item.itemId
+        val id = item.itemId
         if(id == android.R.id.home){
             finish()
         }

@@ -1,4 +1,4 @@
-package com.example.newwavesell.ui.design
+package com.example.kudonavdrawerdemo.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kudonavdrawerdemo.R
-import com.example.kudonavdrawerdemo.`interface`.ElephantItemClickListener
 import com.example.kudonavdrawerdemo.`interface`.HorseItemClickListener
 import com.example.kudonavdrawerdemo.model.Horse
 import kotlin.collections.ArrayList
@@ -19,17 +18,17 @@ class HorseAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): HorseAdapter.LogoHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_logo, parent, false)
+    ): LogoHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_logo, parent, false)
         return LogoHolder(view)
     }
 
    inner class LogoHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        var imgLogo = itemView.findViewById<ImageView>(R.id.imgColor)
-        var tv_name = itemView.findViewById<TextView>(R.id.tv_name)
+        var imgLogo: ImageView = itemView.findViewById(R.id.imgColor)
+        var tvName: TextView = itemView.findViewById(R.id.tv_name)
 
         init {
-            itemView?.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
@@ -44,9 +43,9 @@ class HorseAdapter(
         return listHorse.size
     }
 
-    override fun onBindViewHolder(holder: HorseAdapter.LogoHolder, position: Int) {
-        var itemLogo = listHorse[position]
+    override fun onBindViewHolder(holder: LogoHolder, position: Int) {
+        val itemLogo = listHorse[position]
         holder.imgLogo.setImageResource(itemLogo.imgLogo)
-        holder.tv_name.text = itemLogo.name
+        holder.tvName.text = itemLogo.name
     }
 }

@@ -11,11 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kudonavdrawerdemo.R
 import com.example.kudonavdrawerdemo.`interface`.OnItemClickListener
 import com.example.kudonavdrawerdemo.adapter.CartListAdapter
-import com.example.kudonavdrawerdemo.adapter.ListProAdapter
 import com.example.newwavesell.model.Pro
 
 class CartFragment : Fragment(), OnItemClickListener {
-    private val cartList = generateList(2)
+    private val cartList = generateList()
     private val adapter = CartListAdapter(cartList, this)
 
     companion object {
@@ -29,20 +28,16 @@ class CartFragment : Fragment(), OnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_cart, container, false)
+        val view = inflater.inflate(R.layout.fragment_cart, container, false)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
-        if (recyclerView != null) {
-            recyclerView.adapter = adapter
-        }
-        if (recyclerView != null) {
-            recyclerView.layoutManager = LinearLayoutManager(context)
-        }
+            recyclerView?.adapter = adapter
+            recyclerView?.layoutManager = LinearLayoutManager(context)
         return view
     }
 
-    private fun generateList(size: Int): ArrayList<Pro> {
+    private fun generateList(): ArrayList<Pro> {
         val list = ArrayList<Pro>()
-        for (i in 0..size) {
+        for (i in 0..2) {
             val itemPro = Pro("T-shirt $i", 100, "L", R.color.colorPrimary, 1000, "5/4/1999")
             list += itemPro
         }

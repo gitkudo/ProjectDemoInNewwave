@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kudonavdrawerdemo.R
 import com.example.kudonavdrawerdemo.`interface`.BirdItemClickListener
-import com.example.kudonavdrawerdemo.`interface`.ElephantItemClickListener
 import com.example.kudonavdrawerdemo.model.Bird
 import kotlin.collections.ArrayList
 
@@ -20,13 +19,13 @@ class BirdAdapter(
         parent: ViewGroup,
         viewType: Int
     ): LogoHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_logo, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_logo, parent, false)
         return LogoHolder(view)
     }
 
     inner class LogoHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var imgLogo: ImageView = itemView.findViewById(R.id.imgColor)
-        var tv_name: TextView = itemView.findViewById(R.id.tv_name)
+        var tvName: TextView = itemView.findViewById(R.id.tv_name)
 
         init {
 
@@ -47,8 +46,8 @@ class BirdAdapter(
     }
 
     override fun onBindViewHolder(holder: LogoHolder, position: Int) {
-        var itemLogo = BirdAdapter[position]
+        val itemLogo = BirdAdapter[position]
         holder.imgLogo.setImageResource(itemLogo.image)
-        holder.tv_name.text = itemLogo.name
+        holder.tvName.text = itemLogo.name
     }
 }

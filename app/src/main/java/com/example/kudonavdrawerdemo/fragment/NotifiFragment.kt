@@ -17,7 +17,7 @@ import com.example.newwavesell.model.Pro
 
 
 class NotifiFragment : Fragment(),OnItemClickListener {
-    private val nonList = generateList(10)
+    private val nonList = generateList()
     private val adapter = NotifiAdapter(nonList, this)
 
     override fun onCreateView(
@@ -25,7 +25,7 @@ class NotifiFragment : Fragment(),OnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var root = inflater.inflate(R.layout.fragment_notifi, container, false)
+        val root = inflater.inflate(R.layout.fragment_notifi, container, false)
         val recyclerView = root?.findViewById<RecyclerView>(R.id.recyclerView)
         if (recyclerView != null) {
             recyclerView.adapter = adapter
@@ -36,9 +36,9 @@ class NotifiFragment : Fragment(),OnItemClickListener {
         recyclerView?.setHasFixedSize(true)
         return root
     }
-    private fun generateList(size: Int): ArrayList<Nontifi> {
+    private fun generateList(): ArrayList<Nontifi> {
         val list = ArrayList<Nontifi>()
-        for (i in 0..size) {
+        for (i in 0..4) {
             val itemPro = Nontifi("お知らせ","お知らせです。お知らせです。お知らせです。")
             list += itemPro
         }

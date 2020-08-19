@@ -19,16 +19,16 @@ class CatAdapter(
         parent: ViewGroup,
         viewType: Int
     ): CatHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_logo, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_logo, parent, false)
         return CatHolder(view)
     }
 
    inner class CatHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        var imgLogo = itemView.findViewById<ImageView>(R.id.imgColor)
-        var tv_name = itemView.findViewById<TextView>(R.id.tv_name)
+        var imgLogo:ImageView = itemView.findViewById(R.id.imgColor)
+        var tvName:TextView = itemView.findViewById(R.id.tv_name)
 
         init {
-            itemView?.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
@@ -44,8 +44,8 @@ class CatAdapter(
     }
 
     override fun onBindViewHolder(holder: CatHolder, position: Int) {
-        var itemLogo = listCat[position]
+        val itemLogo = listCat[position]
         holder.imgLogo.setImageResource(itemLogo.image)
-        holder.tv_name.text = itemLogo.name
+        holder.tvName.text = itemLogo.name
     }
 }

@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kudonavdrawerdemo.R
 import com.example.kudonavdrawerdemo.`interface`.OnItemClickListener
-import com.example.kudonavdrawerdemo.model.Nontifi
 import com.example.newwavesell.model.Pro
 
 
@@ -35,7 +34,7 @@ class ListProAdapter(
         holder.tvAmount!!.text = currentItem.amount.toString()
         holder.tvProSize!!.text = currentItem.proSize
 //        holder.tvColor?.setImageResource(R.color.colorAccent)
-        holder.tvColor?.getBackground()?.setColorFilter(LightingColorFilter(-0x1, -R.color.colorAccent))
+        holder.tvColor?.background?.colorFilter = LightingColorFilter(-0x1, -R.color.colorAccent)
         holder.tvPrice!!.text = currentItem.price.toString()
     }
 

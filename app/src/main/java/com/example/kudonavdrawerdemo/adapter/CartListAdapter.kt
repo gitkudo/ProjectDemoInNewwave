@@ -33,7 +33,7 @@ class CartListAdapter(
         holder.tvAmount!!.text = currentItem.amount.toString()
         holder.tvProSize!!.text = currentItem.proSize
 //        holder.tvColor?.setImageResource(R.color.colorAccent)
-        holder.tvColor?.getBackground()?.setColorFilter(LightingColorFilter(-0x1, -R.color.colorAccent))
+        holder.tvColor?.background?.colorFilter = LightingColorFilter(-0x1, -R.color.colorAccent)
         holder.tvPrice!!.text = currentItem.price.toString()
     }
 

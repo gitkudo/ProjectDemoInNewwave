@@ -14,7 +14,7 @@ class ChangePassFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_change_pass, container, false)
+        val view = inflater.inflate(R.layout.fragment_change_pass, container, false)
 
         return view
     }

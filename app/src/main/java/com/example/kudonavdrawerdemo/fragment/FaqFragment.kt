@@ -21,8 +21,8 @@ class FaqFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_faq, container, false)
-        var rvBelow = view?.findViewById<RecyclerView>(R.id.rcvFaq)
+        val view = inflater.inflate(R.layout.fragment_faq, container, false)
+        val rvBelow = view?.findViewById<RecyclerView>(R.id.rcvFaq)
         if (rvBelow != null) {
             rvBelow.adapter = versionAdapter
         }

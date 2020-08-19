@@ -1,10 +1,8 @@
 package com.example.kudonavdrawerdemo
 
-import android.graphics.PorterDuff
-import android.os.Build
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.widget.Toolbar
@@ -17,11 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    var navigationPosition: Int = 0
-    lateinit var listgFragment: ListgFragment
-    lateinit var designFragment: DesignFragment
-    lateinit var cartFragment: CartFragment
-    lateinit var homeFragment: HomeFragment
+    private var navigationPosition: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFlags(

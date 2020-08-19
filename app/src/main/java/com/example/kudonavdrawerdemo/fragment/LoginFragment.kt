@@ -13,7 +13,7 @@ class LoginFragment :Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.fragment_login,container,false)
+        val view = inflater.inflate(R.layout.fragment_login,container,false)
         return view
     }
 }

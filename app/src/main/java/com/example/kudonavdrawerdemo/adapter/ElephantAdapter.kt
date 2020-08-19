@@ -1,4 +1,4 @@
-package com.example.newwavesell.ui.design
+package com.example.kudonavdrawerdemo.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +16,9 @@ class ElephantAdapter(
 ) : RecyclerView.Adapter<ElephantAdapter.AboveHolder>() {
     inner class AboveHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
         var imgAbove:ImageView = itemView.findViewById(R.id.imgIconAbove)
-        var tv_name:TextView = itemView.findViewById(R.id.tv_name)
+        var tvName:TextView = itemView.findViewById(R.id.tv_name)
         init {
-            itemView?.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
@@ -30,7 +30,7 @@ class ElephantAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AboveHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_above, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_above, parent, false)
         return AboveHolder(view)
     }
 
@@ -39,8 +39,8 @@ class ElephantAdapter(
     }
 
     override fun onBindViewHolder(holder: AboveHolder, position: Int) {
-        var itemAbove = listElephant[position]
+        val itemAbove = listElephant[position]
         holder.imgAbove.setImageResource(itemAbove.color)
-        holder.tv_name.text = itemAbove.name
+        holder.tvName.text = itemAbove.name
     }
 }

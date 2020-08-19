@@ -1,4 +1,4 @@
-package com.example.newwavesell.adapter
+package com.example.kudonavdrawerdemo.adapter
 
 import android.content.Context
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.example.newwavesell.fragment.RegisterFragment
 import com.example.newwavesell.fragment.LoginFragment
 
-class MyAdapter(private val myContext: Context, fm: FragmentManager, internal var totalTabs: Int) :
+class MyAdapter(private val myContext: Context, fm: FragmentManager, private var totalTabs: Int) :
     FragmentPagerAdapter(fm) {
 
     // this is for fragment tabs

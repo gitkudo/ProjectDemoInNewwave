@@ -11,16 +11,19 @@ import com.example.kudonavdrawerdemo.R
 import com.example.kudonavdrawerdemo.`interface`.*
 import com.example.kudonavdrawerdemo.adapter.BirdAdapter
 import com.example.kudonavdrawerdemo.adapter.CatAdapter
+import com.example.kudonavdrawerdemo.adapter.ElephantAdapter
+import com.example.kudonavdrawerdemo.adapter.HorseAdapter
 import com.example.kudonavdrawerdemo.model.*
 import com.example.newwavesell.model.ItemBelow
 import com.example.newwavesell.ui.design.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListener,HorseItemClickListener,DogItemClickListener,CatItemClickListener,BirdItemClickListener {
-    lateinit var rcvAbove: RecyclerView
-    lateinit var rvBelow: RecyclerView
-    lateinit var imgShow: ImageView
+class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListener,
+    HorseItemClickListener, DogItemClickListener, CatItemClickListener, BirdItemClickListener {
+    private lateinit var rcvAbove: RecyclerView
+    private lateinit var rvBelow: RecyclerView
+    private lateinit var imgShow: ImageView
 
     //below recycleView
     private var list = ArrayList<ItemBelow>()
@@ -40,7 +43,7 @@ class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListene
 
     // horse RecycleView
     private var listCat = ArrayList<Cat>()
-    private val catAdapter = CatAdapter(listCat,this)
+    private val catAdapter = CatAdapter(listCat, this)
 
     // horse RecycleView
     private var listBird = ArrayList<Bird>()
@@ -51,7 +54,7 @@ class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListene
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_design, container, false)
+        val view = inflater.inflate(R.layout.fragment_design, container, false)
         imgShow = view.findViewById(R.id.img_show)
         val imgBack = view?.findViewById<ImageView>(R.id.imgBack)
         imgBack?.setOnClickListener { activity?.onBackPressed() }
@@ -64,116 +67,74 @@ class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListene
     }
 
     private fun initBelowRcv() {
-        if (rvBelow != null) {
-            rvBelow.adapter = belowAdapter
-        }
-        if (rvBelow != null) {
-            rvBelow.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-        rvBelow?.setHasFixedSize(true)
+        rvBelow.adapter = belowAdapter
+        rvBelow.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         list.add(ItemBelow(R.drawable.ic_elephant, "elephant"))
         list.add(ItemBelow(R.drawable.ic_horse, "horse"))
         list.add(ItemBelow(R.drawable.ic_dog, "dog"))
         list.add(ItemBelow(R.drawable.ic_cat, "cat"))
         list.add(ItemBelow(R.drawable.ic_bird, "bird"))
-
     }
 
     private fun initElephantRcv() {
         listElephant.clear()
         imgShow.colorFilter = null
-        Handler().postDelayed(Runnable {
-            imgShow.setImageDrawable(resources.getDrawable(R.drawable.ic_elephant))
+        Handler().postDelayed({
+            imgShow.setImageResource(R.drawable.ic_elephant)
 
         }, 100)
-
-
-
-        if (rcvAbove != null) {
-            rcvAbove.adapter = elephantAdapter
-        }
-        if (rcvAbove != null) {
-            rcvAbove.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-        rcvAbove?.setHasFixedSize(true)
+        rcvAbove.adapter = elephantAdapter
+        rcvAbove.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         listElephant.add(Elephant(R.drawable.ic_ele_colo, "Gray"))
         listElephant.add(Elephant(R.drawable.ic_ele_green, "Green"))
         listElephant.add(Elephant(R.drawable.ic_ele_yellow, "Yellow"))
     }
 
     private fun initHorseRcv() {
-        listHorse.clear();
+        listHorse.clear()
         imgShow.setImageResource(R.drawable.horse_imagepng)
-        imgShow.setColorFilter(null)
-
-        if (rcvAbove != null) {
-            rcvAbove.adapter = horseAdapter
-        }
-        if (rcvAbove != null) {
-            rcvAbove.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-        rcvAbove?.setHasFixedSize(true)
+        imgShow.colorFilter = null
+        rcvAbove.adapter = horseAdapter
+        rcvAbove.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         listHorse.add(Horse(R.drawable.ic_red, "Red"))
         listHorse.add(Horse(R.drawable.ic_blue, "Blue"))
         listHorse.add(Horse(R.drawable.ic_green, "Green"))
         listHorse.add(Horse(R.drawable.ic_yellow, "Yellow"))
     }
+
     private fun initCatRcv() {
-        listCat.clear();
+        listCat.clear()
         imgShow.setImageResource(R.drawable.ic_cat)
         imgShow.colorFilter = null
-
-        if (rcvAbove != null) {
-            rcvAbove.adapter = catAdapter
-        }
-        if (rcvAbove != null) {
-            rcvAbove.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-        rcvAbove?.setHasFixedSize(true)
+        rcvAbove.adapter = catAdapter
+        rcvAbove.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         listCat.add(Cat(R.drawable.ic_cat_yellow, "Red"))
         listCat.add(Cat(R.drawable.ic_cat_yellow, "Blue"))
         listCat.add(Cat(R.drawable.ic_cat_yellow, "Green"))
         listCat.add(Cat(R.drawable.ic_cat_yellow, "Yellow"))
     }
-    private fun initDogRcv() {
-        listDog.clear();
-        imgShow.setImageResource(R.drawable.ic_dog)
-        imgShow.setColorFilter(null)
 
-        if (rcvAbove != null) {
-            rcvAbove.adapter = dogAdapter
-        }
-        if (rcvAbove != null) {
-            rcvAbove.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-        rcvAbove?.setHasFixedSize(true)
+    private fun initDogRcv() {
+        listDog.clear()
+        imgShow.setImageResource(R.drawable.ic_dog)
+        imgShow.colorFilter = null
+
+
+        rcvAbove.adapter = dogAdapter
+        rcvAbove.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         listDog.add(Dog(R.drawable.ic_dog_black, "Red"))
         listDog.add(Dog(R.drawable.ic_dog_black, "Blue"))
         listDog.add(Dog(R.drawable.ic_dog_black, "Green"))
     }
 
-    fun open1(){
-
-    }
     private fun initBirdRcv() {
-        listBird.clear();
+        listBird.clear()
         imgShow.setImageResource(R.drawable.ic_bird)
-        imgShow.setColorFilter(null)
-
-        if (rcvAbove != null) {
-            rcvAbove.adapter = birdAdapter
-        }
-
-        if (rcvAbove != null) {
-            rcvAbove.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-        rcvAbove?.setHasFixedSize(true)
+        imgShow.colorFilter = null
+        rcvAbove.adapter = birdAdapter
+        rcvAbove.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         listBird.add(Bird(R.drawable.ic_bird_gray, "Red"))
         listBird.add(Bird(R.drawable.ic_bird_gray, "Blue"))
         listBird.add(Bird(R.drawable.ic_bird_gray, "Green"))
@@ -210,7 +171,7 @@ class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListene
     }
 
     override fun horseItemClick(position: Int) {
-        when(position){
+        when (position) {
             0 -> imgShow.setImageResource(R.drawable.ic_red)
             1 -> imgShow.setImageResource(R.drawable.ic_blue)
             2 -> imgShow.setImageResource(R.drawable.ic_green)

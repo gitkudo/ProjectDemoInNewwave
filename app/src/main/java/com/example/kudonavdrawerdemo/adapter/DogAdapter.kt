@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kudonavdrawerdemo.R
 import com.example.kudonavdrawerdemo.`interface`.DogItemClickListener
-import com.example.kudonavdrawerdemo.`interface`.ElephantItemClickListener
 import com.example.kudonavdrawerdemo.model.Dog
 import kotlin.collections.ArrayList
 
@@ -20,16 +19,16 @@ class DogAdapter(
         parent: ViewGroup,
         viewType: Int
     ): DogAdapter.LogoHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_logo, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_logo, parent, false)
         return LogoHolder(view)
     }
 
    inner class LogoHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        var imgLogo = itemView.findViewById<ImageView>(R.id.imgColor)
-        var tv_name = itemView.findViewById<TextView>(R.id.tv_name)
+        var imgLogo:ImageView = itemView.findViewById(R.id.imgColor)
+        var tvName = itemView.findViewById<TextView>(R.id.tv_name)
 
         init {
-            itemView?.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
@@ -45,8 +44,8 @@ class DogAdapter(
     }
 
     override fun onBindViewHolder(holder: DogAdapter.LogoHolder, position: Int) {
-        var itemLogo = listDog[position]
+        val itemLogo = listDog[position]
         holder.imgLogo.setImageResource(itemLogo.image)
-        holder.tv_name.text = itemLogo.name
+        holder.tvName.text = itemLogo.name
     }
 }

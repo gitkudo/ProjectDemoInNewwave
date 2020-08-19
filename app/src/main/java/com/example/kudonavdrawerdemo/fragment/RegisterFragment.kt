@@ -13,7 +13,7 @@ class RegisterFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.fragment_register,container,false)
+        val view = inflater.inflate(R.layout.fragment_register,container,false)
         return view
     }
 }
