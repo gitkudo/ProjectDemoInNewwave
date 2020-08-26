@@ -1,29 +1,45 @@
 package com.example.kudonavdrawerdemo.fragment
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kudonavdrawerdemo.R
-import com.example.kudonavdrawerdemo.`interface`.*
+import com.example.kudonavdrawerdemo.inter.*
 import com.example.kudonavdrawerdemo.adapter.BirdAdapter
 import com.example.kudonavdrawerdemo.adapter.CatAdapter
 import com.example.kudonavdrawerdemo.adapter.ElephantAdapter
 import com.example.kudonavdrawerdemo.adapter.HorseAdapter
 import com.example.kudonavdrawerdemo.model.*
+import com.example.kudonavdrawerdemo.sellrealm.manager.ProductRealmManager
 import com.example.newwavesell.model.ItemBelow
 import com.example.newwavesell.ui.design.*
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog_add_product.*
+import java.util.*
+import kotlin.collections.ArrayList
 
+interface CallBack {
+    fun dialogOnClick(name: String, amount: Int, proSize: String, color: Int, upTime: String)
+}
 
 class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListener,
-    HorseItemClickListener, DogItemClickListener, CatItemClickListener, BirdItemClickListener {
+    HorseItemClickListener, DogItemClickListener, CatItemClickListener, BirdItemClickListener,
+    CallBack {
     private lateinit var rcvAbove: RecyclerView
     private lateinit var rvBelow: RecyclerView
     private lateinit var imgShow: ImageView
+    private val manager = ProductRealmManager()
+    lateinit var realm: Realm;
 
     //below recycleView
     private var list = ArrayList<ItemBelow>()
@@ -55,7 +71,9 @@ class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListene
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_design, container, false)
+        realm = Realm.getDefaultInstance()
         imgShow = view.findViewById(R.id.img_show)
+        val btnAddToCart: Button = view.findViewById(R.id.btn_addToCart)
         val imgBack = view?.findViewById<ImageView>(R.id.imgBack)
         imgBack?.setOnClickListener { activity?.onBackPressed() }
         rcvAbove = view.findViewById(R.id.rcvStyleAbove)!!
@@ -63,7 +81,37 @@ class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListene
         rvBelow = view?.findViewById(R.id.rcvStyle)!!
         initElephantRcv()
         initBelowRcv()
+        btnAddToCart.setOnClickListener {
+            showDialog(this)
+        }
         return view
+    }
+
+    private fun showDialog(callBack: CallBack) {
+        val buider = AlertDialog.Builder(context)
+        buider.setTitle("Describe Product")
+        buider.setCancelable(true)
+        val mDialog = LayoutInflater.from(context).inflate(R.layout.dialog_add_product, null)
+        buider.setView(mDialog)
+        val edtName:EditText = mDialog.findViewById(R.id.edt_name)
+        val edtAmount:EditText = mDialog.findViewById(R.id.edt_amout)
+        val edtProSize:EditText = mDialog.findViewById(R.id.edt_prosize)
+        val edtColor:EditText = mDialog.findViewById(R.id.edt_color)
+        val edtUptime:EditText = mDialog.findViewById(R.id.edt_uptime)
+        val name = edtName.text
+        val amount = edtAmount.text.toString()
+        val proSize = edtProSize.text
+        val color = edtColor.text.toString()
+        val upTime = edtUptime.text
+//        buider.setPositiveButton(
+//            "ok"
+//        ) { _, _ -> callBack.dialogOnClick(name, amount.toInt(), proSize, color.toInt(), upTime) }
+        buider.setPositiveButton("ok", DialogInterface.OnClickListener { dialog, which ->
+            callBack.dialogOnClick(name.toString(), amount.toInt(),
+                proSize.toString(), color.toInt(), upTime.toString()
+            )
+        })
+        buider.create().show()
     }
 
     private fun initBelowRcv() {
@@ -162,20 +210,43 @@ class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListene
         activity?.nav_view?.visibility = View.GONE
     }
 
+    private var getImg: Int = 0
+
     override fun onEleItemClick(position: Int) {
         when (position) {
-            0 -> imgShow.setImageResource(R.drawable.ic_ele_colo)
-            1 -> imgShow.setImageResource(R.drawable.ic_ele_green)
-            2 -> imgShow.setImageResource(R.drawable.ic_ele_yellow)
+            0 -> {
+                getImg = R.drawable.ic_ele_colo
+                imgShow.setImageResource(getImg)
+            }
+            1 -> {
+                getImg = R.drawable.ic_ele_green
+                imgShow.setImageResource(getImg)
+            }
+            2 -> {
+                getImg = R.drawable.ic_ele_yellow
+                imgShow.setImageResource(getImg)
+            }
+
         }
     }
 
     override fun horseItemClick(position: Int) {
         when (position) {
-            0 -> imgShow.setImageResource(R.drawable.ic_red)
-            1 -> imgShow.setImageResource(R.drawable.ic_blue)
-            2 -> imgShow.setImageResource(R.drawable.ic_green)
-            3 -> imgShow.setImageResource(R.drawable.ic_yellow)
+            0 -> {
+                getImg = R.drawable.ic_red
+                imgShow.setImageResource(getImg)
+            }
+            1 -> {getImg = R.drawable.ic_blue
+                imgShow.setImageResource(getImg)}
+
+            2 -> {
+                getImg = R.drawable.ic_green
+                imgShow.setImageResource(getImg)
+            }
+            3 -> {
+                getImg = R.drawable.ic_yellow
+                imgShow.setImageResource(getImg)
+            }
         }
     }
 
@@ -184,11 +255,32 @@ class DesignFragment : Fragment(), OnItemClickListener, ElephantItemClickListene
     }
 
     override fun catItemClick(position: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun birdItemClick(position: Int) {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun dialogOnClick(
+        name: String,
+        amount: Int,
+        proSize: String,
+        color: Int,
+        upTime: String
+    ) {
+        val uuid: UUID = UUID.randomUUID()
+        val randomUUIDString: String = uuid.toString()
+        val product = Pro()
+        product.id = "PRO:$randomUUIDString"
+        product.image = getImg
+        product.name = name
+        product.amount = amount
+        product.proSize = proSize
+        product.color = 500
+        product.upTime = upTime
+        manager.addProduct(realm = realm, product = product)
+        Toast.makeText(context, "Add to cart successfully!", Toast.LENGTH_SHORT).show()
     }
 
 
